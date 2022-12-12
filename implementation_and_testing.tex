@@ -1,0 +1,204 @@
+\documentclass[12pt]{article}
+\usepackage{url}
+\usepackage{setspace}               
+\usepackage[superscript]{cite}      
+\usepackage{graphicx}               
+\usepackage[normalem]{ulem}   		
+\graphicspath{ {Figures/} }         
+\usepackage{caption} 
+\usepackage{cite}
+\usepackage{indentfirst} 
+\usepackage{float}
+\usepackage{subcaption}
+\usepackage{amsmath}  				
+\textwidth=6.5in                    
+\oddsidemargin=0.0in                
+\usepackage{listings}
+\usepackage{listings}
+\usepackage{fancyhdr}
+\usepackage{longtable}
+\usepackage{pdfpages}
+\usepackage[table]{xcolor}
+\pagestyle{fancy}
+\fancyhf{}
+\lhead{Project Title}
+\rhead{Page \thepage}
+
+\usepackage{color}   
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks=true,
+    citecolor=black,
+    linktoc=all, 
+    linkcolor=black,
+}
+
+\begin{document}
+
+\begin{titlepage}
+
+\newcommand{\HRule}{\rule{\linewidth}{0.5mm}} 
+
+\center 
+
+\textsc{\LARGE Missouri State University\\~\\Department computer Science}\\[1.0cm] 
+
+\HRule \\[0.4cm]
+{ \huge \bfseries Implementation and Testing}\\[0.4cm] 
+\HRule \\[1.5cm]
+
+
+\begin{minipage}{0.4\textwidth}
+\begin{flushleft} \large
+Cole Kassing \\ 
+Mike Gegg \\ 
+Sahej Bhatia \\ 
+Cole Scarbrough \\ 
+Aaron Gerbrandt\\ 
+\end{flushleft}
+\end{minipage}
+~
+\begin{minipage}{0.4\textwidth}
+\begin{flushright} \large
+Professor Belkhouche \\ 
+yassinebelkhouche@missouristate.edu
+\end{flushright}
+\end{minipage}\\[2cm]
+
+
+{\large \today}\\[2cm] 
+
+\end{titlepage}
+
+\newpage
+%----------------------------------------------------------------------
+\section{Implementation}
+
+%-----------------------------------------------------------------------------
+
+\subsection{Development Environment and Tools}
+
+\begin{enumerate}
+    \item Unity 2018
+        \begin{description}
+            \item 
+            Unity is a cross-platform game engine that we utilized to create the User Interface. We chose Unity due to its easy-to-use interface, large community, and simple documentation. We used 2018 Unity for its package manager, as well as its support for Augmented Reality projects. Unity also runs on C\# scripts, which allows it to interface well with our other development tools.
+        \end{description}
+    \item Visual Studio 2017
+        \begin{description}
+            \item 
+            Visual Studio is a Integrated Development Environment(IDE) that is owned and supported by Microsoft. Since Microsoft is the original creator of C\#, Visual Studio has many features designed with C\# in mind. This gives it a strong advantage over other virtually any other development environments.
+        \end{description}
+    \item Custom Vision
+        \begin{description}
+            \item 
+            Microsoft Azure's Custom Vision is a service that allowed us to train an Object Recognition model, and then use that access that model through a simple REST API call. This allowed us to offload some of the processing that needed to be done on the HoloLens onto a server in the cloud.
+        \end{description}
+    \item OpenCV
+        \begin{description}
+            \item 
+            OpenCV is an open source computer vision library that contains several useful functions for real-time computer vision. We utilized OpenCV to display the object detection from Computer Vision in real time.
+        \end{description}
+    
+\end{enumerate}
+
+%-----------------------------------------------------------------------------
+\subsection{Algorithms}
+\begin{enumerate}
+
+    \item Deep Learning Models
+    \begin{description}
+        \item
+        To reach our objective for this project, we were going to need to a strong Object Recognition algorithm. This algorithm had to be fast in order to give results in real time. It also needed to be accurate or the rest of our project would not matter. It also needed to be reliable or we would not have a viable final product. In order to meet all three of these requirements, we decided to outsource the algorithm to Microsoft's Custom Vision service. Custom Vision allows for you to train a model with your own images and then hosts it on a server so you can access it through a simple REST API. This gave us access to an algorithm we know we can rely, that we could customize to our project, and saved us the effort of debugging the actual algorithm.
+    \end{description}
+    
+    \item 2D to 3D Mapping
+    \begin{description}
+        \item
+        The Computer Vision analysis returned a two-dimensional image after it performed the object recognition, but we needed a three-dimensional image to show in the world. To solve this we created an algorithm to take the two-dimensional image and figure out how to map it into three-dimensional space and fit with the objects around it.
+    \end{description}
+        
+\end{enumerate}
+\newpage
+%-----------------------------------------------------------------------------
+\subsection{Reused Components}
+\begin{enumerate}
+    \item Unity Engine
+    \begin{description}
+        \hspace{1cm}
+        Unity is a game engine developed by Unity Technologies that allows user to build graphical interfaces for games or apps alike. Unity includes a set of preset libraries that allows our program scripts to link to game objects such as our bounding box for object identification. These libraries can be directly used in our C\# scripts and allow us to control game objects based on our program requirements.
+
+    \end{description}
+    
+    \item Azure Custom Vision 
+    \begin{description}
+        \hspace{1cm} 
+       Azure Custom Vision is a shippable training solution that is custom made for the Microsoft HoloLens. Made by Azure, it is a user friendly AI training program that allowed us to add required photos for our AI to reliably detect objects. In our case, we trained the custom vision model on images of a children's toy - a shape sorter. Once Azure successfully builds a model that can reliably detect these shapes, scripts to integrate the model are produced to allow us to tie in to our unity objects. 
+    \end{description}
+    
+    \item Bounding box
+    \begin{description}
+        \hspace{1cm}
+       The bounding box that appears when the object is successfully detected is a reused object from a open source project that creates it in unity. This allowed us to bypass the time needed to do a deep dive into Unity tools for object creation. Rather we focused on spacial mapping and model  creation/training. 
+    \end{description}
+\end{enumerate}
+
+\newpage
+%-----------------------------------------------------------------------------
+\subsection{Testing}
+
+In our testing process we aimed to test each of our components to ensure that these components follow a set path of procedures. 
+
+\hspace{1cm}
+\item Voice Commands
+    \begin{description}
+        \hspace{1cm}
+     Do not call function during capture process -- Rest does not call while system is in shape mode -- Addshape does not call while system is in shape mode -- Make sure that game state correctly changes -- Complete will create a txt file with system.
+    \end{description}
+    
+    \item Object Detection 
+    \begin{description}
+        \hspace{1cm}
+        finds an shape in environment -- find the slot representing previously found shape.
+    \end{description}
+    
+    \item Spatial Mapping
+    \begin{description}
+        \hspace{1cm}
+        label and box placed correctly (creates a canvas and places the dot). 
+    \end{description}
+    
+     \item UI
+    \begin{description}
+      All errors are caught by alert system -- All relevant alerts are displayed by alert system making sure that game state and instructions are accurately displayed.
+    \end{description}
+
+    \hspace{1cm}
+
+    These modules are intended to work as follows and we designed tests around these functionality. We employed development testing for our use cases where we went through the phases of unit testing, component testing and system testing. Some of these units came as a shippble component thus requiring less unit testing. Our goal was to make sure that these components that we are compiling work best for the requirements of our program. During component testing we encountered some errors as when it came to UI and object detection, and it was crucial we were rigorous in our testing as they are the major components that have the highest priority for efficiency and integrity in our program. Eventually all issues were resolved and within the modules and we moved onto the system testing. System testing did not only account for the system of components mention above but also the Hololens as an added component. This process proved slightly challenging but all issues here were also eventually resolved. 
+
+    Currently, there are a few places within our components that can we a place we keep a watch on. The Unity UI that we made has some integration problems with the Hololens as the Hololens that we are using runs on a out of date version of the Hololens software that does not fully support the current up to date version of Unity. Forcing us to use earlier versions. Currently, it has not shown signs of any problems but a place where problems could arise would be that. 
+
+    Our custom vision model that is a unit within the object detection component also could be a cause of unforeseen errors as we encountered a few times that it has recognized the object as the wrong shape. Thus suggesting a possible deficiency in the prediction model used by Azure custom vision. 
+
+
+    
+    
+
+%-----------------------------------------------------------------------------
+
+
+
+
+\begingroup
+\renewcommand{\section}[2]{}
+\begin{thebibliography}{10}
+
+\bigskip
+
+
+\end{thebibliography}
+\endgroup
+
+
+\end{document}
