@@ -1,3 +1,11 @@
+'''
+Sahejbir Singh Bhatia 
+CSC 450
+Missouri State University 
+12/12/22
+'''
+
+
 # import dependencies
 from IPython.display import display, Javascript, Image
 from google.colab.output import eval_js
